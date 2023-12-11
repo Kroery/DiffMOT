@@ -1,11 +1,11 @@
 eps: 0.001
-#eval_mode: False
-eval_mode: True
+eval_mode: False
+#eval_mode: True
 
 # optimizer
 lr: 0.0001
 # train
-data_dir: '/mnt/8T/home/estar/data/DanceTrack/trackers_gt_GSI'
+data_dir: '/mnt/8T/home/estar/data/DanceTrack/trackers_gt'
 diffnet: HMINet
 interval: 5
 augment: True

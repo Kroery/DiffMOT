@@ -1,6 +1,6 @@
 eps: 0.001
-eval_mode: False
-#eval_mode: True
+#eval_mode: False
+eval_mode: True
 
 # optimizer
 lr: 0.0001
