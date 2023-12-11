@@ -96,16 +96,26 @@ python mot_data_process.py
 * Train on DanceTrack, SportsMOT, and MOT17/20:
 ```
 python main.py --config ./configs/dancetrack.yaml
-
+python main.py --config ./configs/sportsmot.yaml
+python main.py --config ./configs/mot.yaml
 ```
 
-
-
+## IV. Tracking.
+* Change the det_dir, info_dir, reid_dir, and save_dir in config
+* Track on DanceTrack, SportsMOT, MOT17, and MOT20:
+```
+python main.py --config ./configs/dancetrack_test.yaml
+python main.py --config ./configs/sportsmot_test.yaml
+python main.py --config ./configs/mot17_test.yaml
+python main.py --config ./configs/mot20_test.yaml
+```
 
 ## Concat
 If you have some questions, please concat with kroery@shu.edu.cn.
-## Thanks
-Thanks to the base code [DDM-Public](https://github.com/GuHuangAI/DDM-Public).
+
+## Acknowledgement
+A large part of the code is borrowed from [DDM-Public](https://github.com/GuHuangAI/DDM-Public) and [Deep-OC-SORT](https://github.com/GerardMaggiolino/Deep-OC-SORT). Thanks for their wonderful works.
+
 ## Citation
 ~~~
 waiting for updating
