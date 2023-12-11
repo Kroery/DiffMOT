@@ -25,6 +25,9 @@
 
 The tracking speed is test on an RTX 3090 GPU. Smaller detectors can achieve higher FPS, which indicates that DiffMOT can flexibly choose different detectors for various real-world application scenarios. With YOLOX-S, the tracking speed of the entire system can reach up to **30.3 FPS**.
 
+### Video demos
+<img src="assets/DiffMOT_DanceTrack.gif" width="400"/>   <img src="assets/DiffMOT_SportsMOT.gif" width="400"/>
+
 ## I. Installation.
 * install torch
 ~~~
