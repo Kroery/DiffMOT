@@ -1,6 +1,0 @@
-sphinx==2.2.0
-sphinx-markdown-tables
-sphinx-rtd-theme
-sphinxcontrib-napoleon
-sphinxcontrib-websupport
-recommonmark
