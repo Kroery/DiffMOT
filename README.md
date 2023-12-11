@@ -23,7 +23,7 @@
 |YOLOX-L  | 61.5 | 61.7 | 92.0 | 24.2 |
 |YOLOX-X  | 63.4 | 64.0 | 92.7 | 22.7 |
 
-The tracking speed is test on an RTX 3090 GPU. Smaller detectors can achieve higher FPS, which indicates that DiffMOT can flexibly choose different detectors for various real-world application scenarios. With YOLOX-S, the tracking speed of the entire system can reach up to **30.3 FPS**.
+The tracking speed (including detection and tracking speed) is test on an RTX 3090 GPU. Smaller detectors can achieve higher FPS, which indicates that DiffMOT can flexibly choose different detectors for various real-world application scenarios. With YOLOX-S, the tracking speed of the entire system can reach up to **30.3 FPS**.
 
 ### Video demos
 <img src="assets/DiffMOT_DanceTrack.gif" width="400"/>   <img src="assets/DiffMOT_SportsMOT.gif" width="400"/>
@@ -123,7 +123,18 @@ python sports_data_process.py
 python mot_data_process.py
 ```
 
-## III. Training.
+## III. Model ZOO.
+### Detection Model
+coming soon.
+
+### ReID Model
+coming soon.
+
+### Motion Model
+coming soon.
+
+## IV. Training.
+### Train the motion model
 * Change the data_dir in config
 * Train on DanceTrack, SportsMOT, and MOT17/20:
 ```
@@ -132,14 +143,30 @@ python main.py --config ./configs/sportsmot.yaml
 python main.py --config ./configs/mot.yaml
 ```
 
-## IV. Tracking.
+## V. Tracking.
 * Change the det_dir, info_dir, reid_dir, and save_dir in config
-* Track on DanceTrack, SportsMOT, MOT17, and MOT20:
+### Track on DanceTrack
+* High_thres is set to 0.6, low_thres is set to 0.4, w_assoc_emb is set to 2.2, and aw_param is set to 1.7.
 ```
 python main.py --config ./configs/dancetrack_test.yaml
+```
+
+### Track on SportsMOT
+* High_thres is set to 0.6, low_thres is set to 0.4, w_assoc_emb is set to 2.0, and aw_param is set to 1.2.
+```
 python main.py --config ./configs/sportsmot_test.yaml
-python main.py --config ./configs/mot17_test.yaml
-python main.py --config ./configs/mot20_test.yaml
+```
+
+### Track on MOT17
+* High_thres is set to 0.6, low_thres is set to 0.1, w_assoc_emb is set to 2.2, and aw_param is set to 1.7.
+```
+python main.py --config ./configs/dancetrack_test.yaml
+```
+
+### Track on MOT20
+* High_thres is set to 0.4, low_thres is set to 0.1, w_assoc_emb is set to 2.2, and aw_param is set to 1.7.
+```
+python main.py --config ./configs/dancetrack_test.yaml
 ```
 
 ## Concat
