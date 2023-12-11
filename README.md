@@ -1,15 +1,16 @@
 # DiffMOT
 ## DiffMOT: A Real-time Diffusion-based Multiple Object Tracker with Non-linear Prediction 
-
+![Teaser](assets/teaser_git.png)
 
 ## Framework
-
+![Framework](assets/diffmot_git.png)
+![Framework](assets/ddmp_git.png)
 
 ## I. Installation.
 1. install torch
 ~~~
 conda create -n diffmot python=3.9
-conda avticate diffmot
+conda activate diffmot
 pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
 ~~~
 2. install other packages.
