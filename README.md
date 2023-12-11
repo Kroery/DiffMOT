@@ -51,7 +51,7 @@ pip install -r docs/requirements.txt
 
 ## II. Prepare Data.
 The file structure should look like:  
-(a) DanceTrack:
+* **DanceTrack**
 ~~~
 {DanceTrack ROOT}
 |-- dancetrack
@@ -69,7 +69,7 @@ The file structure should look like:
 |   |-- test
 |   |   |-- ...
 ~~~
-(b) SportsMOT:
+* **SportsMOT**
 ~~~
 {SportsMOT ROOT}
 |-- sportsmot
@@ -90,7 +90,7 @@ The file structure should look like:
 |   |   |-- test
 |   |   |   |-- ...
 ~~~
-(c) MOT17/20:
+* **MOT17/20** We train the MOT17 and MOT20 together.
 ~~~
 {MOT17/20 ROOT}
 |-- mot
