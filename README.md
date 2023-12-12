@@ -160,13 +160,13 @@ python main.py --config ./configs/sportsmot_test.yaml
 ### Track on MOT17
 * High_thres is set to 0.6, low_thres is set to 0.1, w_assoc_emb is set to 2.2, and aw_param is set to 1.7.
 ```
-python main.py --config ./configs/dancetrack_test.yaml
+python main.py --config ./configs/mot17_test.yaml
 ```
 
 ### Track on MOT20
 * High_thres is set to 0.4, low_thres is set to 0.1, w_assoc_emb is set to 2.2, and aw_param is set to 1.7.
 ```
-python main.py --config ./configs/dancetrack_test.yaml
+python main.py --config ./configs/mot20_test.yaml
 ```
 
 ## Concat
