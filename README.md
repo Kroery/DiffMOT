@@ -23,7 +23,10 @@
 |YOLOX-L  | 61.5 | 61.7 | 92.0 | 24.2 |
 |YOLOX-X  | 63.4 | 64.0 | 92.7 | 22.7 |
 
-The tracking speed is test on an RTX 3090 GPU. Smaller detectors can achieve higher FPS, which indicates that DiffMOT can flexibly choose different detectors for various real-world application scenarios. With YOLOX-S, the tracking speed of the entire system can reach up to **30.3 FPS**.
+The tracking speed (including detection and tracking speed) is test on an RTX 3090 GPU. Smaller detectors can achieve higher FPS, which indicates that DiffMOT can flexibly choose different detectors for various real-world application scenarios. With YOLOX-S, the tracking speed of the entire system can reach up to **30.3 FPS**.
+
+### Video demos
+<img src="assets/DiffMOT_DanceTrack.gif" width="400"/>   <img src="assets/DiffMOT_SportsMOT.gif" width="400"/>
 
 ## I. Installation.
 * install torch
@@ -48,7 +51,7 @@ pip install -r docs/requirements.txt
 
 ## II. Prepare Data.
 The file structure should look like:  
-(a) DanceTrack:
+* **DanceTrack**
 ~~~
 {DanceTrack ROOT}
 |-- dancetrack
@@ -66,7 +69,7 @@ The file structure should look like:
 |   |-- test
 |   |   |-- ...
 ~~~
-(b) SportsMOT:
+* **SportsMOT**
 ~~~
 {SportsMOT ROOT}
 |-- sportsmot
@@ -87,7 +90,7 @@ The file structure should look like:
 |   |   |-- test
 |   |   |   |-- ...
 ~~~
-(c) MOT17/20:
+* **MOT17/20** We train the MOT17 and MOT20 together.
 ~~~
 {MOT17/20 ROOT}
 |-- mot
@@ -120,7 +123,32 @@ python sports_data_process.py
 python mot_data_process.py
 ```
 
-## III. Training.
+## III. Model ZOO.
+### Detection Model
+We provide some trained YOLOX weights in [download](https://github.com/Kroery/DiffMOT/releases/tag/v1.0) for DiffMOT. Some of them are inherited from [ByteTrack](https://github.com/ifzhang/ByteTrack#model-zoo), [DanceTrack](https://github.com/DanceTrack/DanceTrack#evaluation), and [MixSort](https://github.com/MCG-NJU/MixSort#model-zoo).
+
+### ReID Model
+Ours ReID models for **MOT17/MOT20** is the same as [BoT-SORT](https://github.com/NirAharon/BOT-SORT) , you can download from [MOT17-SBS-S50](https://github.com/Kroery/DiffMOT/releases/download/v1.0/mot17_sbs_S50.pth), [MOT20-SBS-S50](https://github.com/Kroery/DiffMOT/releases/download/v1.0/mot20_sbs_S50.pth). The ReID model for **DanceTrack** is the same as [Deep-OC-SORT](https://github.com/GerardMaggiolino/Deep-OC-SORT), you can download from [Dance-SBS-S50](https://github.com/Kroery/DiffMOT/releases/download/v1.0/dance_sbs_S50.pth). The ReID model for **SportsMOT** is trained by ourself, you can download from [Sports-SBS-S50](https://github.com/Kroery/DiffMOT/releases/download/v1.0/sports_sbs_S50.pth).
+
+**Notes**:
+
+
+* [MOT20-SBS-S50](https://drive.google.com/drive/folders/18IsZGeGiyKDshhYIzbpYXoNEcBhPY8lN?usp=sharing) is trained by [Deep-OC-SORT](https://github.com/GerardMaggiolino/Deep-OC-SORT), because the weight from BOT-SORT is corrupted. Refer to [Issue](https://github.com/GerardMaggiolino/Deep-OC-SORT/issues/6).
+* ReID models for SportsMOT is trained by ourself.
+
+
+### Motion Model (D$^2$MP)
+coming soon.
+
+## IV. Training.
+### Train the detection model
+* You can refer to the [ByteTrack](https://github.com/ifzhang/ByteTrack#training).
+
+### Train the ReID model
+* You can refer to the [BoT-SORT](https://github.com/NirAharon/BoT-SORT#train-the-reid-module).
+
+
+### Train the motion model (D$^2$MP)
 * Change the data_dir in config
 * Train on DanceTrack, SportsMOT, and MOT17/20:
 ```
@@ -129,13 +157,40 @@ python main.py --config ./configs/sportsmot.yaml
 python main.py --config ./configs/mot.yaml
 ```
 
-## IV. Tracking.
-* Change the det_dir, info_dir, reid_dir, and save_dir in config
-* Track on DanceTrack, SportsMOT, MOT17, and MOT20:
+## V. Tracking.
+### Prepare detections
+* You can obtain the detections by [detection_model](https://github.com/Kroery/DiffMOT#detection-model) or use the [detection_results](https://github.com/Kroery/DiffMOT/releases/download/v1.1/Detections.zip) we have provided.
+* Change the det_dir in config.
+
+### Prepare ReID embeddings
+* We have provided the [ReID embeddings](https://drive.google.com/drive/folders/1mScXsSgq_t7Y4AakPMhwrQ8Lu0vbGj1Z?usp=sharing).
+* Change the reid_dir in config.
+
+### Track on DanceTrack
+* Change the info_dir, and save_dir in config.
+* High_thres is set to 0.6, low_thres is set to 0.4, w_assoc_emb is set to 2.2, and aw_param is set to 1.7.
 ```
 python main.py --config ./configs/dancetrack_test.yaml
+```
+
+### Track on SportsMOT
+* Change the info_dir, and save_dir in config.
+* High_thres is set to 0.6, low_thres is set to 0.4, w_assoc_emb is set to 2.0, and aw_param is set to 1.2.
+```
 python main.py --config ./configs/sportsmot_test.yaml
+```
+
+### Track on MOT17
+* Change the info_dir, and save_dir in config.
+* High_thres is set to 0.6, low_thres is set to 0.1, w_assoc_emb is set to 2.2, and aw_param is set to 1.7.
+```
 python main.py --config ./configs/mot17_test.yaml
+```
+
+### Track on MOT20
+* Change the info_dir, and save_dir in config.
+* High_thres is set to 0.4, low_thres is set to 0.1, w_assoc_emb is set to 2.2, and aw_param is set to 1.7.
+```
 python main.py --config ./configs/mot20_test.yaml
 ```
 

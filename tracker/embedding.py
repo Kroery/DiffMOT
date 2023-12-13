@@ -13,13 +13,13 @@ from external.adaptors.fastreid_adaptor import FastReID
 
 
 class EmbeddingComputer:
-    def __init__(self, dataset, test_dataset, grid_off, max_batch=1024):
+    def __init__(self, config, dataset, test_dataset, grid_off, max_batch=1024):
         self.model = None
         self.dataset = dataset
         self.test_dataset = test_dataset
         self.crop_size = (128, 384)
-        os.makedirs("/home/estar/lwy/DiffMOT/cache/embeddings/", exist_ok=True)
-        self.cache_path = "/home/estar/lwy/DiffMOT/cache/embeddings/{}_embedding.pkl"
+        os.makedirs(config.reid_dir, exist_ok=True)
+        self.cache_path = os.path.join(config.reid_dir, "{}_embedding.pkl")
 
 
         self.cache = {}
