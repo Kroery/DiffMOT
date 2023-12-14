@@ -1,5 +1,5 @@
 # DiffMOT
-## DiffMOT: A Real-time Diffusion-based Multiple Object Tracker with Non-linear Prediction [Project page](https://diffmot.github.io/)
+## DiffMOT: A Real-time Diffusion-based Multiple Object Tracker with Non-linear Prediction ([Project page](https://diffmot.github.io/))
 ![Teaser](assets/teaser_git.png)
 
 ## Framework
