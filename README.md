@@ -194,7 +194,7 @@ python main.py --config ./configs/mot17_test.yaml
 python main.py --config ./configs/mot20_test.yaml
 ```
 
-## Concat
+## Contact
 If you have some questions, please concat with kroery@shu.edu.cn.
 
 ## Acknowledgement
