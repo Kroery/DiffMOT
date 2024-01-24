@@ -202,7 +202,7 @@ A large part of the code is borrowed from [DDM-Public](https://github.com/GuHuan
 
 ## Citation
 ~~~
-waiting for updating
+waiting for updating!
 ~~~
 
 
