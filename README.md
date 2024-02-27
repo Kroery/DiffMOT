@@ -195,7 +195,7 @@ python main.py --config ./configs/mot20_test.yaml
 ```
 
 ## Contact
-If you have some questions, please concat with kroery@shu.edu.cn.
+If you have some questions, please contact with kroery@shu.edu.cn.
 
 ## Acknowledgement
 A large part of the code is borrowed from [DDM-Public](https://github.com/GuHuangAI/DDM-Public) and [Deep-OC-SORT](https://github.com/GerardMaggiolino/Deep-OC-SORT). Thanks for their wonderful works.
