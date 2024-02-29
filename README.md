@@ -1,10 +1,14 @@
-# DiffMOT
+# DiffMOT (CVPR2024)
 ## DiffMOT: A Real-time Diffusion-based Multiple Object Tracker with Non-linear Prediction ([Project page](https://diffmot.github.io/))
 ![Teaser](assets/teaser_git.png)
 
 ## Framework
 ![Framework](assets/diffmot_git.png)
 ![Framework](assets/ddmp_git.png)
+
+# News
+- 2024-02-27: This work is accepted by **CVPR-2024**.
+
 
 ## Tracking performance
 ### Benchmark Evaluation
@@ -195,14 +199,18 @@ python main.py --config ./configs/mot20_test.yaml
 ```
 
 ## Contact
+<<<<<<< HEAD
 If you have some questions, please concat with kroery@shu.edu.cn.
+=======
+If you have some questions, please contact with kroery@shu.edu.cn.
+>>>>>>> d934bc7a90656e23d1a0d4764806e089dddb4c04
 
 ## Acknowledgement
 A large part of the code is borrowed from [DDM-Public](https://github.com/GuHuangAI/DDM-Public) and [Deep-OC-SORT](https://github.com/GerardMaggiolino/Deep-OC-SORT). Thanks for their wonderful works.
 
 ## Citation
 ~~~
-waiting for updating
+waiting for updating!
 ~~~
 
 
