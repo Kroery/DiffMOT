@@ -9,7 +9,6 @@
 # News
 - 2024-02-27: This work is accepted by **CVPR-2024**.
 
-
 ## Tracking performance
 ### Benchmark Evaluation
 | Dataset    |  HOTA | IDF1 | Assa | MOTA | DetA |
