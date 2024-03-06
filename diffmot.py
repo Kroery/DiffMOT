@@ -62,7 +62,7 @@ class DiffMOT():
                 train_loss = train_loss.mean()
 
                 self.optimizer.zero_grad()
-                pbar.set_description(f"Epoch {epoch},  MSE: {train_loss.item():.6f}")
+                pbar.set_description(f"Epoch {epoch},  Loss: {train_loss.item():.6f}")
                 train_loss.backward()
                 self.optimizer.step()
 
