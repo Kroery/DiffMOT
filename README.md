@@ -11,12 +11,12 @@
 
 ## Tracking performance
 ### Benchmark Evaluation
-| Dataset    |  HOTA | IDF1 | Assa | MOTA | DetA |
-|--------------|-----------|--------|-------|----------|----------|
-|DanceTrack  | 63.4 | 64.0 | 48.8 | 92.7 | 82.5 |
-|SportsMOT   | 76.2 | 76.1 | 65.1 | 97.1 | 89.3 |
-|MOT17       | 64.5 | 79.3 | 64.6 | 79.8 | 64.7 |
-|MOT20       | 61.7 | 74.9 | 60.5 | 76.7 | 63.2 |
+| Dataset    |  HOTA | IDF1 | Assa | MOTA | DetA | Results |
+|--------------|-----------|--------|-------|----------|----------|----------|
+|DanceTrack  | 63.4 | 64.0 | 48.8 | 92.7 | 82.5 |[DanceTrack_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/DanceTrack_DiffMOT.zip)|
+|SportsMOT   | 76.2 | 76.1 | 65.1 | 97.1 | 89.3 |[SportsMOT_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/SportsMOT_DiffMOT.zip)|
+|MOT17       | 64.5 | 79.3 | 64.6 | 79.8 | 64.7 |[MOT17_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/MOT17_DiffMOT.zip)|
+|MOT20       | 61.7 | 74.9 | 60.5 | 76.7 | 63.2 |[MOT20_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/MOT20_DiffMOT.zip)|
 
 ### Results on DanceTrack test set with different detector
 | Detector    |  HOTA | IDF1 | MOTA | FPS |
