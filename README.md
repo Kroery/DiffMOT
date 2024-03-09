@@ -1,5 +1,5 @@
 # DiffMOT (CVPR2024)
-## DiffMOT: A Real-time Diffusion-based Multiple Object Tracker with Non-linear Prediction[![arxiv paper](https://img.shields.io/badge/Project-Page-green)](https://diffmot.github.io/)[![arxiv paper](https://img.shields.io/badge/arXiv-Paper-red)](https://arxiv.org/abs/2403.02075)
+## DiffMOT: A Real-time Diffusion-based Multiple Object Tracker with Non-linear Prediction	[![arxiv paper](https://img.shields.io/badge/Project-Page-green)](https://diffmot.github.io/)	[![arxiv paper](https://img.shields.io/badge/arXiv-Paper-red)](https://arxiv.org/abs/2403.02075)
 ![Teaser](assets/teaser_git.png)
 
 ## Framework
