@@ -13,7 +13,7 @@
 ### Benchmark Evaluation
 | Dataset    |  HOTA | IDF1 | Assa | MOTA | DetA | Results |
 |--------------|-----------|--------|-------|----------|----------|----------|
-|DanceTrack  | 63.4 | 64.0 | 48.8 | 92.7 | 82.5 |[DanceTrack_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/DanceTrack_DiffMOT.zip)|
+|DanceTrack  | 62.3 | 63.0 | 47.2 | 92.8 | 82.5 |[DanceTrack_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/DanceTrack_DiffMOT.zip)|
 |SportsMOT   | 76.2 | 76.1 | 65.1 | 97.1 | 89.3 |[SportsMOT_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/SportsMOT_DiffMOT.zip)|
 |MOT17       | 64.5 | 79.3 | 64.6 | 79.8 | 64.7 |[MOT17_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/MOT17_DiffMOT.zip)|
 |MOT20       | 61.7 | 74.9 | 60.5 | 76.7 | 63.2 |[MOT20_Results](https://github.com/Kroery/DiffMOT/releases/download/v1.2/MOT20_DiffMOT.zip)|
@@ -24,7 +24,7 @@
 |YOLOX-S  | 53.3 | 56.6 | 88.4 | 30.3 |
 |YOLOX-M  | 57.2 | 58.6 | 91.2 | 25.4 |
 |YOLOX-L  | 61.5 | 61.7 | 92.0 | 24.2 |
-|YOLOX-X  | 63.4 | 64.0 | 92.7 | 22.7 |
+|YOLOX-X  | 62.3 | 63.0 | 92.8 | 22.7 |
 
 The tracking speed (including detection and tracking speed) is test on an RTX 3090 GPU. Smaller detectors can achieve higher FPS, which indicates that DiffMOT can flexibly choose different detectors for various real-world application scenarios. With YOLOX-S, the tracking speed of the entire system can reach up to **30.3 FPS**.
 
