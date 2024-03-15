@@ -7,6 +7,7 @@
 ![Framework](assets/ddmp_git.png)
 
 # News
+- We now upload the trained motion model.
 - 2024-02-27: This work is accepted by **CVPR-2024**.
 
 ## Tracking performance
@@ -141,7 +142,7 @@ Ours ReID models for **MOT17/MOT20** is the same as [BoT-SORT](https://github.co
 
 
 ### Motion Model (D$^2$MP)
-coming soon.
+Refer to [models](https://github.com/Kroery/DiffMOT?tab=readme-ov-file#benchmark-evaluation). We train on DanceTrack and MOT17/20 for 800 epochs, and train on SportsMOT for 1200 epochs.
 
 ## IV. Training.
 ### Train the detection model
