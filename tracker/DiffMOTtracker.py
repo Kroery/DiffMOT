@@ -35,7 +35,7 @@ class STrack(BaseTrack):
         self.conds = deque([], maxlen=5)
 
 
-        self._tlwh = np.asarray(tlwh, dtype=np.float)
+        self._tlwh = np.asarray(tlwh, dtype=float)
         self.kalman_filter = None
         self.mean, self.covariance = None, None
         self.is_activated = False
@@ -248,7 +248,7 @@ class diffmottracker(object):
         self.std = np.array([0.289, 0.274, 0.278], dtype=np.float32).reshape(1, 1, 3)
 
         # self.kalman_filter = KalmanFilter()
-        self.embedder = EmbeddingComputer(self.config, 'dancetrack', False, True)
+        self.embedder = EmbeddingComputer(self.config, self.config.dataset.lower(), self.config.eval_mode, True)
         self.alpha_fixed_emb = 0.95
 
 

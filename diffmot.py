@@ -1,5 +1,6 @@
 import os
 import torch
+import cv2
 
 import numpy as np
 import os.path as osp
@@ -17,6 +18,7 @@ from tracker.DiffMOTtracker import diffmottracker
 
 from tracking_utils.log import logger
 from tracking_utils.timer import Timer
+from tracking_utils.visualization import plot_tracking
 
 def write_results(filename, results, data_type='mot'):
     if data_type == 'mot':
@@ -101,6 +103,12 @@ class DiffMOT():
             imgs = [s for s in os.listdir(img_path)]
             imgs.sort()
 
+            video_path = osp.join(self.config.info_dir, seq, 'output.mp4')
+            logger.info(f"video save_path is {video_path}")
+            vid_writer = cv2.VideoWriter(
+                video_path, cv2.VideoWriter_fourcc(*"mp4v"), 30, (int(seq_width), int(seq_height))
+            )
+
             for i, f in enumerate(frames):
                 if frame_id % 10 == 0:
                     logger.info('Processing frame {} ({:.2f} fps)'.format(frame_id, 1. / max(1e-5, timer.average_time)))
@@ -110,11 +118,11 @@ class DiffMOT():
                 dets = np.loadtxt(f_path, dtype=np.float32, delimiter=',').reshape(-1, 6)[:, 1:6]
 
                 im_path = osp.join(img_path, imgs[i])
-                # img = cv2.imread(im_path)
+                img = cv2.imread(im_path)
                 tag = f"{seq}:{frame_id+1}"
                 # track
-                # online_targets = tracker.update(dets, self.model, frame_id, seq_width, seq_height, tag, img)
-                online_targets = tracker.update(dets, self.model, frame_id, seq_width, seq_height, tag)
+                online_targets = tracker.update(dets, self.model, frame_id, seq_width, seq_height, tag, img)
+                # online_targets = tracker.update(dets, self.model, frame_id, seq_width, seq_height, tag)
                 online_tlwhs = []
                 online_ids = []
                 for t in online_targets:
@@ -125,6 +133,11 @@ class DiffMOT():
                 timer.toc()
                 # save results
                 results.append((frame_id + 1, online_tlwhs, online_ids))
+                online_im = plot_tracking(
+                    img, online_tlwhs, online_ids, frame_id=frame_id + 1, fps=1. / timer.average_time
+                )
+                vid_writer.write(online_im)
+
                 frame_id += 1
 
             tracker.dump_cache()
@@ -138,8 +151,9 @@ class DiffMOT():
         self._build_dir()
         self._build_encoder()
         self._build_model()
-        self._build_train_loader()
-        self._build_optimizer()
+        if not self.config["eval_mode"]:
+            self._build_train_loader()
+            self._build_optimizer()
 
         print("> Everything built. Have fun :)")
 

@@ -1,0 +1,30 @@
+# Ignore compiled Python files
+*.pyc
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore IDE or editor specific files
+.vscode/
+.idea/
+
+# Ignore local configuration files
+*.env
+
+# Ignore build directories
+build/
+
+# Ignore .egg-info directories
+*.egg-info/
+
+# Ignore .so files (shared objects)
+*.so
+
+# Ignore extra directories
+output/
+weights/
+YOLOX_outputs/
+
+# Ignore extra files
+*.mp4

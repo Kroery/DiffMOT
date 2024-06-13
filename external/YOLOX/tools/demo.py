@@ -5,6 +5,7 @@
 import argparse
 import os
 import time
+import re
 from loguru import logger
 
 import cv2
@@ -30,11 +31,19 @@ def make_parser():
     parser.add_argument(
         "--path", default="./assets/dog.jpg", help="path to images or video"
     )
+    parser.add_argument(
+        "--output_txt_path", default="outputs/demo/img1", help="path to txt folder"
+    )
     parser.add_argument("--camid", type=int, default=0, help="webcam demo camera id")
     parser.add_argument(
         "--save_result",
         action="store_true",
         help="whether to save the inference result of image/video",
+    )
+    parser.add_argument(
+        "--save_txt",
+        action="store_true",
+        help="whether to save the inference result of txt format",
     )
 
     # exp file
@@ -83,6 +92,7 @@ def make_parser():
         action="store_true",
         help="Using TensorRT model for testing.",
     )
+    parser.add_argument("--num_classes", default=80, type=int, help="number of classes")
     return parser
 
 
@@ -187,15 +197,38 @@ class Predictor(object):
         return vis_res
 
 
-def image_demo(predictor, vis_folder, path, current_time, save_result):
+def image_demo(predictor, vis_folder, txt_folder, path, current_time, save_result, save_txt):
     if os.path.isdir(path):
         files = get_image_list(path)
     else:
         files = [path]
     files.sort()
+
     for image_name in files:
         outputs, img_info = predictor.inference(image_name)
         result_image = predictor.visual(outputs[0], img_info, predictor.confthre)
+        postfix = image_name.split('/')[1]
+        if save_txt:
+            save_folder = os.path.join(
+                txt_folder, "detections", postfix
+            )
+            os.makedirs(save_folder, exist_ok=True)
+            save_file_name = os.path.join(save_folder, os.path.basename(image_name.split('.')[0]+'.txt'))
+            logger.info("Saving detection result in {}".format(save_file_name))
+            # Open the file in write mode and write each element of the list with '\n'
+            # Define a regular expression pattern to extract the numeric part
+            pattern = r'\d+'  # This pattern matches one or more digits
+            frame = int(re.search(pattern, image_name.split('/')[-1]).group()) 
+
+            with open(save_file_name, "w") as file:
+                if outputs[0] is not None:
+                    for item in outputs[0].cpu().numpy():
+                        item = [str(num) for num in item]
+                        item = str(frame) + ',' + ','.join(item[:5])
+                        file.write(item + '\n')
+                else:
+                    file.write('\n')
+
         if save_result:
             save_folder = os.path.join(
                 vis_folder, time.strftime("%Y_%m_%d_%H_%M_%S", current_time)
@@ -208,6 +241,11 @@ def image_demo(predictor, vis_folder, path, current_time, save_result):
         if ch == 27 or ch == ord("q") or ch == ord("Q"):
             break
 
+    seqinfo_content = f"[Sequence]\nname=MOT17-02-DPM\nimDir=img1\nframeRate=30\nseqLength={len(files)}\nimWidth={img_info['width']}\nimHeight={img_info['height']}\nimExt=.jpg\n"
+
+    seqinfo_path = os.path.join(txt_folder, postfix, 'seqinfo.ini')
+    with open(seqinfo_path, 'w') as file:
+        file.write(seqinfo_content)
 
 def imageflow_demo(predictor, vis_folder, current_time, args):
     cap = cv2.VideoCapture(args.path if args.demo == "video" else args.camid)
@@ -255,6 +293,10 @@ def main(exp, args):
     if args.save_result:
         vis_folder = os.path.join(file_name, "vis_res")
         os.makedirs(vis_folder, exist_ok=True)
+    txt_folder = None
+    if args.save_txt:
+        txt_folder = args.output_txt_path
+        os.makedirs(txt_folder, exist_ok=True)
 
     if args.trt:
         args.device = "gpu"
@@ -268,6 +310,7 @@ def main(exp, args):
     if args.tsize is not None:
         exp.test_size = (args.tsize, args.tsize)
 
+    exp.num_classes = args.num_classes
     model = exp.get_model()
     logger.info("Model Summary: {}".format(get_model_info(model, exp.test_size)))
 
@@ -317,7 +360,7 @@ def main(exp, args):
     )
     current_time = time.localtime()
     if args.demo == "image":
-        image_demo(predictor, vis_folder, args.path, current_time, args.save_result)
+        image_demo(predictor, vis_folder, txt_folder, args.path, current_time, args.save_result, args.save_txt)
     elif args.demo == "video" or args.demo == "webcam":
         imageflow_demo(predictor, vis_folder, current_time, args)
 

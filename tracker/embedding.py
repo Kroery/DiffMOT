@@ -103,8 +103,8 @@ class EmbeddingComputer:
             embs = self.cache[tag]
             if embs.shape[0] != bbox.shape[0]:
                 raise RuntimeError(
-                    "ERROR: The number of cached embeddings don't match the "
-                    "number of detections.\nWas the detector model changed? Delete cache if so."
+                    f"ERROR: The number of cached embeddings : {embs.shape[0]} don't match the "
+                    f"number of detections : {bbox.shape[0]}.\nWas the detector model changed? Delete cache if so."
                 )
             return embs
 
@@ -173,7 +173,7 @@ class EmbeddingComputer:
                 path = "external/weights/mot20_sbs_S50.pth"
             else:
                 return self._get_general_model()
-        elif self.dataset == "dance":
+        elif self.dataset == "dancetrack":
             path = "external/weights/dance_sbs_S50.pth"
             # path = "/home/estar/lwy/DiffMOT/external/weights/dancetrack_sbs_S50_hybtid.pth"
         elif self.dataset == "sports":
