@@ -39,6 +39,11 @@ conda create -n diffmot python=3.9
 conda activate diffmot
 pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
 ~~~
+* install DiffMOT.
+~~~
+git clone https://github.com/Kroery/DiffMOT.git
+cd DiffMOT
+~~~
 * install other packages.
 ~~~
 pip install -r requirement.txt
