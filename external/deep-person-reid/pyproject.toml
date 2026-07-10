@@ -1,0 +1,26 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel",
+    "numpy",
+    "cython",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "torchreid"
+dynamic = [
+    "version",
+    "description",
+    "authors",
+    "readme",
+    "dependencies",
+    "keywords",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "torchreid.__version__"}
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+include = ["torchreid"]

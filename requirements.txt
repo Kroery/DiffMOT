@@ -1,6 +1,5 @@
 einops
 pyyaml
-argparse
 easydict
 numpy
 tensorboardX

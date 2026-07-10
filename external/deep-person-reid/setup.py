@@ -1,21 +1,12 @@
 import numpy as np
 import os.path as osp
-from setuptools import setup, find_packages
-from distutils.extension import Extension
+from setuptools import setup, find_packages, Extension
 from Cython.Build import cythonize
-
 
 def readme():
     with open("README.rst") as f:
         content = f.read()
     return content
-
-
-def find_version():
-    version_file = "torchreid/__init__.py"
-    with open(version_file, "r") as f:
-        exec(compile(f.read(), version_file, "exec"))
-    return locals()["__version__"]
 
 
 def numpy_include():
@@ -43,8 +34,6 @@ def get_requirements(filename="requirements.txt"):
 
 
 setup(
-    name="torchreid",
-    version=find_version(),
     description="A library for deep learning person re-ID in PyTorch",
     author="Kaiyang Zhou",
     license="MIT",

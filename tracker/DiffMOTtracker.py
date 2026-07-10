@@ -35,7 +35,7 @@ class STrack(BaseTrack):
         self.conds = deque([], maxlen=5)
 
 
-        self._tlwh = np.asarray(tlwh, dtype=np.float)
+        self._tlwh = np.asarray(tlwh, dtype=float)
         self.kalman_filter = None
         self.mean, self.covariance = None, None
         self.is_activated = False
